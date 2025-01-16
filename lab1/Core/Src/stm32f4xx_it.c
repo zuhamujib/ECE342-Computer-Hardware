@@ -167,8 +167,9 @@ void SysTick_Handler(void)
   */
 void EXTI4_IRQHandler(void)
 {
-  // Your code here
-
+  if (__HAL_GPIO_EXTI_GET_FLAG(COL0_Pin)) {
+    current_col = 0;
+  } 
   HAL_GPIO_EXTI_IRQHandler(COL0_Pin);
 }
 
@@ -177,7 +178,13 @@ void EXTI4_IRQHandler(void)
   */
 void EXTI9_5_IRQHandler(void)
 {
-  // Your code here
+  if (__HAL_GPIO_EXTI_GET_FLAG(COL1_Pin)) {
+    current_col = 1;
+  } else if (__HAL_GPIO_EXTI_GET_FLAG(COL2_Pin)) {
+    current_col = 2;
+  } else if (__HAL_GPIO_EXTI_GET_FLAG(COL3_Pin)) {
+    current_col = 3;
+  }
 
   HAL_GPIO_EXTI_IRQHandler(COL1_Pin);
   HAL_GPIO_EXTI_IRQHandler(COL2_Pin);
