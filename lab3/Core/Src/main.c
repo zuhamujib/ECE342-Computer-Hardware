@@ -25,7 +25,7 @@
 
 
 #define WAVE_PERIOD 2*M_PI
-#define STEP_RADIANS 0.01
+#define STEP_RADIANS 0.01	// vary this for checking how it affects the output
 /**
   * @brief  The application entry point.
   * @retval int
@@ -44,7 +44,7 @@ int main(void)
   MX_TIM6_Init();
   MX_USART3_Init();
 
-	uint16_t adc_res, start, end, diff;
+	uint16_t dac_val, start, end, diff;
 	char message[100];
 	// from last time: 
 	// 	when you convert analog signals to digital using ADC it does not convert it into volt units but in quantized bits/output
@@ -72,15 +72,25 @@ int main(void)
 	// 1 full period = 2pi radians
 	// add offset of 1V to avoid negative values
 	// 12 bits resolution means max digital value is 4095
-
+	
+	// *** 2.1: SINE WAVE ***
 	HAL_DAC_Init(&hdac);
-	HAL_DAC_Start(&hdac, DAC_CHANNEL_1); // starting the conversion in DAC hardware from the ADC hardware results to the D5 pin output
-	// uint16_t masked_adc_res = adc_res & mask;  // Masking lower bits to test the quatization error
+	HAL_DAC_Start(&hdac, DAC_CHANNEL_1); // starts the DAC hardware
+	// uint16_t masked_dac_val = dac_val & mask;  // Masking lower bits to test the quatization error
 	for (int i = 0; i < WAVE_PERIOD; i + STEP_RADIANS) {
-		adc_res = (sin(i) + 1)/2;
-		HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, adc_res); // converts the discrete values to analog wave
+		dac_val = (sin(i) + 1)/2;
+		HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, dac_val); // converts the discrete values dac_val to analog wave
 	}
+	
+	// QUESTIONS:
+	// 1. Given the board clock frequency = 100MHz, what is the relationship between number of points/samples and the output frequency:
+	//	the frequency depends on the 
+	// 2. When changing the step rate, how does the output change?
+	//	increasing the step would make the wave have more quatization error (less smooth)
+	//	when the sample rate > 2*frequency then aliasing occurs
 
+	// *** 2.1: LUT ***
+	
 	// ****** PART 3 ******
 	
 	// HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
