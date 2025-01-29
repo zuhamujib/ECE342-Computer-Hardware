@@ -7,6 +7,7 @@ extern DAC_HandleTypeDef hdac;
 extern TIM_HandleTypeDef htim6;
 extern USART_HandleTypeDef husart3;
 
+void print_msg(char * msg);
 void SystemClock_Config(void);
 void MX_GPIO_Init(void);
 void MX_DAC_Init(void);
