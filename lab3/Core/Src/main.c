@@ -25,12 +25,13 @@
 
 #include "config.h"
 #include "fixedpt.h"
+#include "stm32f4xx_it.h"
 
 #define M_PI 3.14159265358979323846
 #define WAVE_PERIOD (2 * M_PI)
-#define STEP_RADIANS 0.01  // vary this for checking how it affects the output
+#define STEP_RADIANS 0.1  // vary this for checking how it affects the output
 #define DAC_MAX_VAL 4095
-#define NUM_SAMPLES 628
+#define NUM_SAMPLES 63
 
 /**
  * @brief  The application entry point.
@@ -41,6 +42,7 @@
 uint16_t dac_val, start, end, diff;
 uint16_t array[NUM_SAMPLES];
 uint16_t square_LUT[NUM_SAMPLES];
+uint16_t harmonics = 0.0;
 float angle = 0.0;
 char message[100];
 
@@ -78,8 +80,8 @@ int main(void) {
   // part2_1();
   // part2_2();
 
-  part3_square();
-  // part3_LUT();
+  // part3_square();
+  part3_LUT();
 }
 
 // ****** PART 1 ******
@@ -169,8 +171,7 @@ void part2_2() {
 
 // ****** PART 3 ********
 void part3_square() {
-  harmonics =
-      10;  // modify these to see how the behaviour of the output changes
+  harmonics = 0;  // modify these to see how the behaviour of the output changes
   uint16_t k = 0;
   float square_val = 0.5;
 
@@ -192,31 +193,28 @@ void part3_square() {
 void part3_LUT() {
   float square_val = 0.5;
   harmonics = 1;
+  uint16_t k = 0;
 
   // Pre computing the sin(x) values in LUT
   for (int i = 0; i < NUM_SAMPLES; i++) {
     angle += STEP_RADIANS;
-    square_LUT[i] =
-        (uint16_t)((sin(angle) + 1.0) * (DAC_MAX_VAL / 2.0));  // Scale to DAC
+    square_LUT[i] = sin(angle);
   }
   uint16_t index = 0;
   uint16_t new_index = 0;
   HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
 
   while (1) {
-    for (int n = 0; n < harmonics; n++) {
-      int k = 2 * n + 1;  // Odd harmonics: 1, 3, 5, 7...
-      new_index =
-          (index * k) % NUM_SAMPLES;  // Loop back to start after full cycle
-      square_val += (2 * square_LUT[new_index]) / (k * M_PI);
-    }
-    dac_val = (uint16_t)(square_val + 1.0) * DAC_MAX_VAL / 2.0;
-    HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, dac_val);
 
-    angle += STEP_RADIANS;
-    if (angle > WAVE_PERIOD) {
-      angle = 0.0;
+    for (int n = 0; n < harmonics; n++) {
+       k = 2 * n + 1;  // Odd harmonics: 1, 3, 5, 7...
+       new_index = (uint16_t) (index * k) % NUM_SAMPLES;  // Loop back to start after full cycle
+       square_val += (uint16_t) ((2 * square_LUT[new_index]) / (k * M_PI));
     }
+    dac_val = (uint16_t)((square_val + 1.0) * (DAC_MAX_VAL / 2.0));  // Scale to DAC
+    HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, dac_val);
+		
+		index = (index + 1) % NUM_SAMPLES;
   }
 }
 // Some notes from last time:

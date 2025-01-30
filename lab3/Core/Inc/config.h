@@ -4,7 +4,6 @@
 #include "main.h"
 
 extern DAC_HandleTypeDef hdac;
-extern uint16_t harmonics;
 extern TIM_HandleTypeDef htim6;
 extern USART_HandleTypeDef husart3;
 
