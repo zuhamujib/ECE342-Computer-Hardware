@@ -208,13 +208,17 @@ void part3_LUT() {
 
     for (int n = 0; n < harmonics; n++) {
        k = 2 * n + 1;  // Odd harmonics: 1, 3, 5, 7...
-       new_index = (uint16_t) (index * k) % NUM_SAMPLES;  // Loop back to start after full cycle
+       new_index = (uint16_t) ((angle * k) % WAVE_PERIOD)/ STEP_RADIANS;  // Loop back to start after full cycle
        square_val += (uint16_t) ((2 * square_LUT[new_index]) / (k * M_PI));
     }
     dac_val = (uint16_t)((square_val + 1.0) * (DAC_MAX_VAL / 2.0));  // Scale to DAC
     HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, dac_val);
-		
-		index = (index + 1) % NUM_SAMPLES;
+
+	angle += STEP_RADIANS;
+    if (angle > WAVE_PERIOD) {
+      angle = 0.0;
+    }
+	  
   }
 }
 // Some notes from last time:
