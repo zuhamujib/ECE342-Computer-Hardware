@@ -65,24 +65,23 @@ int main(void) {
   MX_DAC_Init();
   MX_TIM6_Init();
   MX_USART3_Init();
-
-	angle = 0.0;
-	
-	// part1();
-	
-	// HAL_DAC_Init(&hdac);
+  
+  angle = 0.0;
+  // part1();
+  
+  // HAL_DAC_Init(&hdac);
   // HAL_DAC_Start(&hdac, DAC_CHANNEL_1);  // starts the DAC hardware
-	
-	// part2_1();
-	// part2_2();
-	
-	// part3_square();
-	// part3_LUT();
+  
+  // part2_1();
+  // part2_2();
+  
+  // part3_square();
+  // part3_LUT();
 }
 
 // ****** PART 1 ******
 void part1() {
-    // prescalar: dividing input clock by a certain constant to make it slower
+	// prescalar: dividing input clock by a certain constant to make it slower
     uint16_t sum = 0;
 	while (1) {
 		HAL_TIM_Base_Start(&htim6);
@@ -122,8 +121,8 @@ void part2_2() {
 	angle += STEP_RADIANS;
 	array[i] = (uint16_t)((sin(angle) + 1.0) * (DAC_MAX_VAL / 2.0));  // Scale to DAC
   }
-	
-	uint16_t index = 0;
+  
+  uint16_t index = 0;
 	
   while (1) {
     // HAL_TIM_Base_Start(&htim6);
@@ -174,14 +173,14 @@ void part3_LUT() {
 	float square_val = 0.5;
 	int harmonics = 10;
 	
-    // Pre computing the sin(x) values in LUT
-    for (int i = 0; i < NUM_SAMPLES; i++) {
+	// Pre computing the sin(x) values in LUT
+	for (int i = 0; i < NUM_SAMPLES; i++) {
 		angle += STEP_RADIANS;
 		square_LUT[i] = (uint16_t)((sin(angle) + 1.0) * (DAC_MAX_VAL / 2.0));  // Scale to DAC
     }
 
     uint16_t index = 0;
-		uint16_t new_index = 0;
+	uint16_t new_index = 0;
     HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
 
     while (1) {
