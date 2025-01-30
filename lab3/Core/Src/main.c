@@ -84,18 +84,18 @@ int main(void) {
 void part1() {
     // prescalar: dividing input clock by a certain constant to make it slower
     uint16_t sum = 0;
-		while (1) {
-			HAL_TIM_Base_Start(&htim6);
-			start = __HAL_TIM_GET_COUNTER(&htim6);
-			for (uint16_t i = 0; i < 100; i++) {
-				sum += i;
-			}
-			end = __HAL_TIM_GET_COUNTER(&htim6);
-			diff = end - start;
-			sprintf(message, "execution time = %d\n", diff);
-			print_msg(message);
-			HAL_Delay(500);
+	while (1) {
+		HAL_TIM_Base_Start(&htim6);
+		start = __HAL_TIM_GET_COUNTER(&htim6);
+		for (uint16_t i = 0; i < 100; i++) {
+			sum += i;
 		}
+		end = __HAL_TIM_GET_COUNTER(&htim6);
+		diff = end - start;
+		sprintf(message, "execution time = %d\n", diff);
+		print_msg(message);
+		HAL_Delay(500);
+	}
 }
 
 // ****** PART 2 ******
@@ -106,21 +106,21 @@ void part1() {
 
 void part2_1() {
     // *** 2.1: SINE WAVE ***
-		while (1) {
-			dac_val = (uint16_t) ((sin(angle) + 1.0) * DAC_MAX_VAL/2.0);
-			HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, dac_val);  // converts the discrete values dac_val to analog wave
-			angle += STEP_RADIANS;
-			if (angle > WAVE_PERIOD) {
-				angle = 0;
-			}
+	while (1) {
+		dac_val = (uint16_t) ((sin(angle) + 1.0) * DAC_MAX_VAL/2.0);
+		HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, dac_val);  // converts the discrete values dac_val to analog wave
+		angle += STEP_RADIANS;
+		if (angle > WAVE_PERIOD) {
+			angle = 0;
 		}
+	}
 }
 void part2_2() {
   // *** 2.1: LUT ***
 	// Pre computing the sin(x) values in LUT
   for (int i = 0; i < NUM_SAMPLES; i++) {
-		angle += STEP_RADIANS;
-		array[i] = (uint16_t)((sin(angle) + 1.0) * (DAC_MAX_VAL / 2.0));  // Scale to DAC
+	angle += STEP_RADIANS;
+	array[i] = (uint16_t)((sin(angle) + 1.0) * (DAC_MAX_VAL / 2.0));  // Scale to DAC
   }
 	
 	uint16_t index = 0;
@@ -176,8 +176,8 @@ void part3_LUT() {
 	
     // Pre computing the sin(x) values in LUT
     for (int i = 0; i < NUM_SAMPLES; i++) {
-			angle += STEP_RADIANS;
-			square_LUT[i] = (uint16_t)((sin(angle) + 1.0) * (DAC_MAX_VAL / 2.0));  // Scale to DAC
+		angle += STEP_RADIANS;
+		square_LUT[i] = (uint16_t)((sin(angle) + 1.0) * (DAC_MAX_VAL / 2.0));  // Scale to DAC
     }
 
     uint16_t index = 0;
@@ -185,19 +185,18 @@ void part3_LUT() {
     HAL_DAC_Start(&hdac, DAC_CHANNEL_1);
 
     while (1) {
-	
-			for (int n = 0; n < harmonics; n++) {
-				int k = 2 * n + 1;  // Odd harmonics: 1, 3, 5, 7...
-				new_index = (index * k) % NUM_SAMPLES;  	// Loop back to start after full cycle
-				square_val += (2 * square_LUT[new_index])/ (k * M_PI);
-			}
-			dac_val = (uint16_t) (square_val + 1.0) * DAC_MAX_VAL/2.0;
-			HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, dac_val);
-	
-			angle += STEP_RADIANS;
-			if (angle > WAVE_PERIOD) {
-				angle = 0.0;
-			}
+		for (int n = 0; n < harmonics; n++) {
+			int k = 2 * n + 1;  // Odd harmonics: 1, 3, 5, 7...
+			new_index = (index * k) % NUM_SAMPLES;  	// Loop back to start after full cycle
+			square_val += (2 * square_LUT[new_index])/ (k * M_PI);
+		}
+		dac_val = (uint16_t) (square_val + 1.0) * DAC_MAX_VAL/2.0;
+		HAL_DAC_SetValue(&hdac, DAC_CHANNEL_1, DAC_ALIGN_12B_R, dac_val);
+
+		angle += STEP_RADIANS;
+		if (angle > WAVE_PERIOD) {
+			angle = 0.0;
+		}
 				
     }
 }
