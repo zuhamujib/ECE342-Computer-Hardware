@@ -20,6 +20,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
+
+extern uint16_t harmonics;
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -206,6 +208,15 @@ void EXTI15_10_IRQHandler(void)
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
 	
   /* USER CODE END EXTI15_10_IRQn 0 */
+// checks if the interrupt comes from the button press
+  if (__HAL_GPIO_EXTI_GET_FLAG(USER_Btn_Pin)) {
+	harmonics++;
+	  if (harmonics > 50) {
+		  harmonics = 0;
+	  }
+    HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+  }
+	// clears the interrupt
   HAL_GPIO_EXTI_IRQHandler(USER_Btn_Pin);
 	
   /* USER CODE BEGIN EXTI15_10_IRQn 1 */
