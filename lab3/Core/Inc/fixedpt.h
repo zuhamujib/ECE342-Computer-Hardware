@@ -31,10 +31,10 @@ typedef int fixedpt;
 #define FXD_TO_INT(F) ((F) >> FXD_FRAC_BITS)
 
 // Macros for basic arithmetic operations. 
-#define FXD_ADD(A,B) /* TODO */
-#define FXD_SUB(A,B) /* TODO */
-#define FXD_MUL(A,B) /* TODO */
-#define FXD_DIV(A,B) /* TODO */
+#define FXD_ADD(A,B) ((A)+(B))
+#define FXD_SUB(A,B) ((A)-(B))
+#define FXD_MUL(A,B) ((fixedpt)(((int64_t)(A) * (B)) >> FXD_FRAC_BITS)) //shift R to fix scale, 64=no overflow for 32bit*32bit
+#define FXD_DIV(A,B) ((fixedpt)(((int64_t)(A) << FXD_FRAC_BITS) / (B)))
 
 // Other useful macros such as getting just the fractional part. 
 #define FXD_FRAC_MASK	(((fixedpt)1 << FXD_FRAC_BITS) - 1)
