@@ -171,7 +171,7 @@ void part3_square(){
 }
 void part3_LUT() {
 	float square_val = 0.5;
-	int harmonics = 10;
+	harmonics = 1;
 	
 	// Pre computing the sin(x) values in LUT
 	for (int i = 0; i < NUM_SAMPLES; i++) {
