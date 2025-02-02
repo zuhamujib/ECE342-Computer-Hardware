@@ -22,37 +22,37 @@
 
 int8_t current_row = -1, current_col = -1;
 
-int keys = { {'3', '2', '1', '0'},
+char keys[4][4] = { {'3', '2', '1', '0'},
              {'7', '6', '5', '4'},
              {'B', 'A', '9', '8'},
              {'F', 'E', 'D', 'C'}
 };
 
 
-void update_keypad {
+void update_keypad (){
   for (int i = 0; i < 4; i ++) {
-     if (row == 0) {
+     if (current_row == 0) {
         HAL_GPIO_WritePin(ROW0_GPIO_Port, ROW0_Pin, GPIO_PIN_SET);
         HAL_GPIO_WritePin(ROW1_GPIO_Port, ROW1_Pin, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(ROW2_GPIO_Port, ROW2_Pin, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(ROW3_GPIO_Port, ROW3_Pin, GPIO_PIN_RESET);
-     } else if ( row == 1) {
+     } else if ( current_row == 1) {
         HAL_GPIO_WritePin(ROW0_GPIO_Port, ROW0_Pin, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(ROW1_GPIO_Port, ROW1_Pin, GPIO_PIN_SET);
         HAL_GPIO_WritePin(ROW2_GPIO_Port, ROW2_Pin, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(ROW3_GPIO_Port, ROW3_Pin, GPIO_PIN_RESET);
-     } else if (row == 2) {
+     } else if (current_row == 2) {
         HAL_GPIO_WritePin(ROW0_GPIO_Port, ROW0_Pin, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(ROW1_GPIO_Port, ROW1_Pin, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(ROW2_GPIO_Port, ROW2_Pin, GPIO_PIN_SET);
         HAL_GPIO_WritePin(ROW3_GPIO_Port, ROW3_Pin, GPIO_PIN_RESET);
-     } else if (row == 3) {
+     } else if (current_row == 3) {
         HAL_GPIO_WritePin(ROW0_GPIO_Port, ROW0_Pin, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(ROW1_GPIO_Port, ROW1_Pin, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(ROW2_GPIO_Port, ROW2_Pin, GPIO_PIN_RESET);
         HAL_GPIO_WritePin(ROW3_GPIO_Port, ROW3_Pin, GPIO_PIN_SET);
      }
-      Hal_Delay(50);
+      HAL_Delay(50);
   }
 
   if (current_col >= 0 && current_col < 4) {

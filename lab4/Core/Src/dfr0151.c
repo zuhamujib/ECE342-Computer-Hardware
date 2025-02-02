@@ -37,28 +37,54 @@ void rtc_init()
   rs&=3;
   if (sqwe) rs|=0x10;
   if (out) rs|=0x80;
-
+	
   rtc_write(0x07,rs);
+	
+	uint8_t status = rtc_read(0x00);
+  status &= 0x7F;
+  rtc_write(0x00, status);
 }
 
 void rtc_get_time(uint8_t *hour,uint8_t *min,uint8_t *sec)
 {
-  // Your code here
+	*sec = rtc_read(0x00); // seconds register: 0
+	*min = rtc_read(0x01); // minutes register: 1
+	*hour = rtc_read(0x02);   // hours register: 2
 }
 
 void rtc_set_time(uint8_t hour,uint8_t min,uint8_t sec)
 {
-  // Your code here
+	uint8_t time[3];
+	
+	time[0] = bcd2bin(hour);
+	time[1] = bcd2bin(min);
+	time[2] = bcd2bin(sec);
+	
+	if (HAL_I2C_Mem_Write(&hi2c1,ADDR_DS1307, 0x00,I2C_MEMADD_SIZE_8BIT,time,4,100) != HAL_OK){
+    Error_Handler();
+  }
 }
 
 void rtc_get_date(uint8_t *week_day,uint8_t *day,uint8_t *month,uint8_t *year)
 {
-  // Your code here
+	*week_day = rtc_read(0x03); // weekday register: 3
+	*day = rtc_read(0x04);	// date register: 4
+	*month = rtc_read(0x05);	// month register: 5
+	*year = rtc_read(0x06);	// year register: 6
 }
 
 void rtc_set_date(uint8_t week_day,uint8_t day,uint8_t month,uint8_t year)
 {
-  // Your code here
+	uint8_t date[4];
+	
+	date[0] = bcd2bin(week_day);
+	date[1] = bcd2bin(day);
+	date[2] = bcd2bin(month);
+	date[3] = bcd2bin(year);
+	
+	if (HAL_I2C_Mem_Write(&hi2c1,ADDR_DS1307, 0x03,I2C_MEMADD_SIZE_8BIT,date,4,100) != HAL_OK){
+    Error_Handler();
+  }
 }
 
 void eeprom_write(uint16_t address, uint8_t *data, uint16_t size) {
