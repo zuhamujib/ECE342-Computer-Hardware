@@ -1,4 +1,8 @@
 #include "dfr0151.h"
+#include "config.h"
+
+#include <stdio.h>
+#include <string.h>
 
 extern I2C_HandleTypeDef hi2c1;
 
@@ -43,55 +47,90 @@ void rtc_init()
 	uint8_t status = rtc_read(0x00);
   status &= 0x7F;
   rtc_write(0x00, status);
+	
+	    // Disable the Clock Halt (CH) bit (Bit 7 of 0x00 register)
+    uint8_t status1 = rtc_read(0x00) & 0x7F; // Mask out CH bit
+    rtc_write(0x00, status1);
 }
 
 void rtc_get_time(uint8_t *hour,uint8_t *min,uint8_t *sec)
 {
-	*sec = rtc_read(0x00); // seconds register: 0
-	*min = rtc_read(0x01); // minutes register: 1
-	*hour = rtc_read(0x02);   // hours register: 2
+	uint8_t data[3];
+	
+  if (HAL_I2C_Mem_Read(&hi2c1,ADDR_DS1307,0x00,I2C_MEMADD_SIZE_8BIT,data,3,100) != HAL_OK) {
+    Error_Handler();
+  }
+
+	*sec = bcd2bin(data[0]); // seconds register: 0
+	*min = bcd2bin(data[1]);	// minutes register: 1
+	*hour = bcd2bin(data[2]);	// hours register: 2
 }
 
 void rtc_set_time(uint8_t hour,uint8_t min,uint8_t sec)
 {
 	uint8_t time[3];
 	
-	time[0] = bcd2bin(hour);
-	time[1] = bcd2bin(min);
-	time[2] = bcd2bin(sec);
+	time[0] = bin2bcd(sec);
+	time[1] = bin2bcd(min);
+	time[2] = bin2bcd(hour);
 	
-	if (HAL_I2C_Mem_Write(&hi2c1,ADDR_DS1307, 0x00,I2C_MEMADD_SIZE_8BIT,time,4,100) != HAL_OK){
+	if (HAL_I2C_Mem_Write(&hi2c1,ADDR_DS1307, 0x00,I2C_MEMADD_SIZE_8BIT,time,3,100) != HAL_OK){
     Error_Handler();
   }
 }
 
 void rtc_get_date(uint8_t *week_day,uint8_t *day,uint8_t *month,uint8_t *year)
 {
-	*week_day = rtc_read(0x03); // weekday register: 3
-	*day = rtc_read(0x04);	// date register: 4
-	*month = rtc_read(0x05);	// month register: 5
-	*year = rtc_read(0x06);	// year register: 6
+	uint8_t data[4];
+	
+  if (HAL_I2C_Mem_Read(&hi2c1,ADDR_DS1307,0x03,I2C_MEMADD_SIZE_8BIT,data,4,100) != HAL_OK) {
+    Error_Handler();
+  }
+
+	*week_day = bcd2bin(*data); // weekday register: 0
+	*day = bcd2bin(*(data + 1));	// date register: 1
+	*month = bcd2bin(*(data + 2));	// month register: 2
+	*year = bcd2bin(*(data + 3));	// year register: 3
 }
 
 void rtc_set_date(uint8_t week_day,uint8_t day,uint8_t month,uint8_t year)
 {
 	uint8_t date[4];
 	
-	date[0] = bcd2bin(week_day);
-	date[1] = bcd2bin(day);
-	date[2] = bcd2bin(month);
-	date[3] = bcd2bin(year);
+	date[0] = bin2bcd(week_day);
+	date[1] = bin2bcd(day);
+	date[2] = bin2bcd(month);
+	date[3] = bin2bcd(year);
 	
 	if (HAL_I2C_Mem_Write(&hi2c1,ADDR_DS1307, 0x03,I2C_MEMADD_SIZE_8BIT,date,4,100) != HAL_OK){
     Error_Handler();
   }
 }
 
-void eeprom_write(uint16_t address, uint8_t *data, uint16_t size) {
-  // Your code here
+void eeprom_write(uint16_t address, uint8_t *data, uint16_t size) 
+{	
+	char msg[100];
+	// note: don't need to convert to bcd as we're writing directly to mem addresses
+	if (HAL_I2C_Mem_Write(&hi2c1,ADDR_EEPROM,address,I2C_MEMADD_SIZE_16BIT,data,size,100) != HAL_OK){
+		Error_Handler();
+	}
+	sprintf(msg, "This is what eeprom_write store for the alarm and date values: \n");
+  print_msg(msg);
+	
+	sprintf(msg, "Time: %02u:%02u:%02u\n", data[2], data[1], data[0]);
+  print_msg(msg);
+
+	sprintf(msg, "Date: %u. %u. %u. %u\n", data[3], data[4], data[5], data[6]);
+  print_msg(msg);
 }
 
-uint8_t eeprom_read(uint16_t address) {
-  // Your code here
-  return -1;
+uint8_t eeprom_read(uint16_t address)
+{
+	uint8_t data;
+
+  if (HAL_I2C_Mem_Read(&hi2c1,ADDR_EEPROM,address,I2C_MEMADD_SIZE_16BIT, &data,1,100) != HAL_OK) {
+    Error_Handler();
+  }
+
+  return data;
 }

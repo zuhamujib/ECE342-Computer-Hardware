@@ -20,13 +20,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_it.h"
-#include "config.h"
-
-
-#include "dfr0151.h"
-
-#include <stdio.h>
-#include <string.h>
 
 extern uint8_t button_press;
 /* Private includes ----------------------------------------------------------*/
@@ -243,10 +236,6 @@ void EXTI15_10_IRQHandler(void)
   /* USER CODE END EXTI15_10_IRQn 0 */
 	if (__HAL_GPIO_EXTI_GET_FLAG(USER_Btn_Pin)) {
     button_press = 1;
-		HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
-		char msg[100];
-		sprintf(msg, "Entering interrupt handler\n");
-    print_msg(msg);
   }
 	// clears the interrupt
   HAL_GPIO_EXTI_IRQHandler(USER_Btn_Pin);
