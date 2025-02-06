@@ -59,22 +59,31 @@ int main(void)
   char msg[100];
 	
   // Your start up code here
-	uint8_t blink = 0;
+	// uint8_t blink = 0;
 	
 	sprintf(msg, "Starting program! or reset!\n");
   print_msg(msg);
 	
 	// part 4: demo - Set the current rtc time to that saved in eeprom address 0 - 6	
-	// restore_time();
+	restore_time();
+	uint8_t was_pressed = 0;
 	
   while (1)
   {
-		
 		uint8_t seconds, minutes, hours;
 		uint8_t weekday, date, month, year;
 		
-		// uint8_t alarm[7];
-	/*
+		uint8_t alarm[7];
+		//if (was_pressed) {
+			alarm[0] = eeprom_read(0x0007);
+			alarm[1] = eeprom_read(0x0008);
+			alarm[2] = eeprom_read(0x0009);
+			alarm[3] = eeprom_read(0x000A);
+			alarm[4] = eeprom_read(0x000B);
+			alarm[5] = eeprom_read(0x000C);
+			alarm[6] = eeprom_read(0x000D);
+		//}
+		
 		if (button_press) {
 			sprintf(msg, "is button pressed?\n");
 			print_msg(msg);
@@ -99,13 +108,14 @@ int main(void)
 			alarm[1] += 0b1;	// Increment the minute 
 			eeprom_write(0x0007, alarm, size); // Store current alarm time and date
 			button_press = 0;	// disable interrupt
-			
+			was_pressed = 1;
 			// sprintf(msg, "did i set the alarm for 1 minute? \n");
 			// print_msg(msg);
 		}
 		
 		// part3: demo
 		rtc_get_time(&hours, &minutes, &seconds);
+		rtc_get_date(&weekday, &date, &month, &year);
 		if (year == alarm[6] && month == alarm[5] && date == alarm[4] && weekday == alarm[3] && hours == alarm[2] && minutes == alarm[1] && seconds == alarm[0]) {
 			sprintf(msg, "ALARM\n");
 			// blink = 1;
@@ -119,17 +129,16 @@ int main(void)
 			}
 			// blink = 0;
 		}
-		*/
+		
 		// part1: demo
-		// Reading the trc date and time
-		rtc_get_time(&hours, &minutes, &seconds);
-		sprintf(msg, "Time: %02u:%02u:%02u\n", bcd2bin(hours), bcd2bin(minutes), bcd2bin(seconds));
+		// Reading the rtc date and time
+		// rtc_get_time(&hours, &minutes, &seconds);
+		sprintf(msg, "Time: %02u:%02u:%02u\n", hours, minutes, seconds);
     print_msg(msg);
 		
-		rtc_get_date(&weekday, &date, &month, &year);
-		sprintf(msg, "Date: %u. %u. %u. %u\n", bcd2bin(weekday), bcd2bin(date), bcd2bin(month), bcd2bin(year));
+		sprintf(msg, "Date: %u. %u. %u. %u\n", weekday, date, month, year);
     print_msg(msg);
-		/*
+		
 		// reading the alarm date and time
 		uint8_t data[7];
 		data[0] = eeprom_read(0x0007);
@@ -140,12 +149,12 @@ int main(void)
 		data[5] = eeprom_read(0x000C);
 		data[6] = eeprom_read(0x000D);
 		
-		sprintf(msg, "Alarm Time: %u:%u:%u\n", data[2], data[1], data[0]);
+		sprintf(msg, "Alarm Day: %u, Alarm Date: %u. %u. %u\n", data[3], data[4], data[5], data[6]);
     print_msg(msg);
-
-		sprintf(msg, "Alarm Date: %u. %u. %u. %u\n", data[3], data[4], data[5], data[6]);
+		
+		sprintf(msg, "Alarm Time: %02u:%02u:%02u\n", data[2], data[1], data[0]);
     print_msg(msg);
-		*/
+		
 		HAL_Delay(1000);	// 1 sec
 		
   }

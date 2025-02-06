@@ -47,10 +47,6 @@ void rtc_init()
 	uint8_t status = rtc_read(0x00);
   status &= 0x7F;
   rtc_write(0x00, status);
-	
-	    // Disable the Clock Halt (CH) bit (Bit 7 of 0x00 register)
-    uint8_t status1 = rtc_read(0x00) & 0x7F; // Mask out CH bit
-    rtc_write(0x00, status1);
 }
 
 void rtc_get_time(uint8_t *hour,uint8_t *min,uint8_t *sec)
@@ -86,11 +82,16 @@ void rtc_get_date(uint8_t *week_day,uint8_t *day,uint8_t *month,uint8_t *year)
   if (HAL_I2C_Mem_Read(&hi2c1,ADDR_DS1307,0x03,I2C_MEMADD_SIZE_8BIT,data,4,100) != HAL_OK) {
     Error_Handler();
   }
-
-	*week_day = bcd2bin(*data); // weekday register: 0
-	*day = bcd2bin(*(data + 1));	// date register: 1
-	*month = bcd2bin(*(data + 2));	// month register: 2
-	*year = bcd2bin(*(data + 3));	// year register: 3
+	
+	*week_day = bcd2bin(data[0]); // weekday register: 0
+	*day = bcd2bin(data[1]);	// date register: 1
+	*month = bcd2bin(data[2]);	// month register: 2
+	*year = bcd2bin(data[3]);	// year register: 3
+	/*
+	char msg[100];
+	sprintf(msg, "Date: %02u/%02u/%02u/%02u \n", *week_day, *day, *month, *year);
+  print_msg(msg);
+	*/
 }
 
 void rtc_set_date(uint8_t week_day,uint8_t day,uint8_t month,uint8_t year)
