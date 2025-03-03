@@ -177,10 +177,14 @@ uint8_t ov7670_init(void){
 
 uint8_t ov7670_read(uint8_t reg){
   // Your code here
+	uint8_t val;
+	return val;
 }
 
 HAL_StatusTypeDef ov7670_write(uint8_t reg,uint8_t val){
   // Your code here
+	HAL_StatusTypeDef status;
+	return status;
 }
 
 void ov7670_snapshot(uint16_t *buff){

@@ -23,7 +23,7 @@
 #include <stdio.h>
 #include <string.h>
 
-
+uint8_t screen_buff[IMG_ROWS * IMG_COLS];
 
 uint16_t snapshot_buff[IMG_ROWS * IMG_COLS];
 
@@ -53,25 +53,36 @@ int main(void)
 
   char msg[100];
 
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+  // HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
   ov7670_init();
+	    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 
+	// configure_TIM1_PWM();
   // Your start up code here
 
   while (1)
   {
     // Your code here
+		//print_msg("iteration!\n");
+		HAL_Delay(1000);
+		print_buf();
+		/*
     if (HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin)) {
       HAL_Delay(100);  // debounce
 
       print_msg("Snap!\r\n");
     }
+		*/
   }
 }
 
 
 void print_buf() {
-  // Send image data through serial port.
-
-  // Your code here
+	int i;
+	for (i=0; i <(IMG_ROWS*IMG_COLS); i++){
+		screen_buff[i] = 0x00;
+	}
+	print_msg("\r\nPREAMBLE!\r\n");
+	HAL_Delay(1000);
+	uart_send_bin(screen_buff, 25056);
 }
