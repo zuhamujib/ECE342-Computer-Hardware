@@ -69,7 +69,7 @@ int main(void)
 		
 		
 		// part 3: snapshot
-		while(dma_flag != 1){};
+		while(dma_flag != 1){};	// waiting for interrupt to be triggered
 		if (dma_flag == 1) {	// full frame interrupt triggered
 			// print_msg("frame capture success!\n");
 			
