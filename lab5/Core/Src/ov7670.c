@@ -20,7 +20,7 @@ const uint8_t OV7670_reg[OV7670_REG_NUM][2] = {
   { 0x11, 0b1000000 }, //
 
   // Hardware window
-  { 0x11, 0x01 }, //PCLK settings, 15fps
+  { 0x11, 0x00 }, //PCLK settings, 15fps
   { 0x32, 0x80 }, //HREF
   { 0x17, 0x17 }, //HSTART
   { 0x18, 0x05 }, //HSTOP
