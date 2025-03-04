@@ -109,16 +109,6 @@ void print_image() {
 		uart_send_bin(ptr +(i*2 + 1), 1);
 		//buffer[i] = ptr[i*2 + 1];	// extracting the odd bits only for the gray scale
 	}
-		/*
-	print_msg("\r\nPREAMBLE!\r\n");
-
-	uint16_t* ptr = (uint16_t*)snapshot_buff;  // Correctly interpret as 16-bit pixels
-
-	for (int i = 0; i < (IMG_ROWS * IMG_COLS); i++) {
-			uint8_t grayscale_value = (ptr[i] >> 8) & 0xFF;  // Extract the MSB (Y component)
-			uart_send_bin(&grayscale_value, 1);  // Send each byte one at a time
-	}
-		*/
 }
 
 void print_buf() {
