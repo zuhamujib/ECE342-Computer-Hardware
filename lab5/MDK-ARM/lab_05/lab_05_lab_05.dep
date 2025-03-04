@@ -35,7 +35,7 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x67BE8555)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd.h)(0x67BE8554)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h)(0x67BE8555)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x67BE8554)
-F (..\Core\Src\ov7670.c)(0x67C3FC46)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_lab_05-IC:/Users/gobli/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="541" -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o lab_05/ov7670.o -MMD)
+F (..\Core\Src\ov7670.c)(0x67C549EB)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_lab_05-IC:/Users/gobli/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="541" -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o lab_05/ov7670.o -MMD)
 I (..\Core\Inc\config.h)(0x67BE8554)
 I (..\Core\Inc\main.h)(0x67BE8554)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x67BE8554)
@@ -70,7 +70,7 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd.h)(0x67BE8554)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h)(0x67BE8555)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x67BE8554)
 I (..\Core\Inc\ov7670.h)(0x67BE8554)
-F (../Core/Src/main.c)(0x67C40204)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_lab_05-IC:/Users/gobli/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="541" -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o lab_05/main.o -MMD)
+F (../Core/Src/main.c)(0x67C54EA8)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_lab_05-IC:/Users/gobli/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="541" -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o lab_05/main.o -MMD)
 I (..\Core\Inc\main.h)(0x67BE8554)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x67BE8554)
 I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x67BE8554)
@@ -105,40 +105,40 @@ I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h)(0x67BE8555)
 I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x67BE8554)
 I (..\Core\Inc\config.h)(0x67BE8554)
 I (..\Core\Inc\ov7670.h)(0x67BE8554)
-F (../Core/Src/stm32f4xx_it.c)(0x67BE8554)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_lab_05-IC:/Users/gobli/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="541" -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o lab_05/stm32f4xx_it.o -MMD)
-I (..\Core\Inc\main.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x67BE8554)
-I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h)(0x67BE8554)
-I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x67BE8554)
-I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f446xx.h)(0x67BE8554)
-I (..\Drivers\CMSIS\Include\core_cm4.h)(0x67BE8554)
-I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x67BE8555)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h)(0x67BE8555)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dcmi.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dcmi_ex.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x67BE8555)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x67BE8555)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x67BE8555)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd.h)(0x67BE8554)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h)(0x67BE8555)
-I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x67BE8554)
+F (../Core/Src/stm32f4xx_it.c)(0x67C54E88)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_lab_05-IC:/Users/gobli/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="541" -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o lab_05/stm32f4xx_it.o -MMD)
 I (..\Core\Inc\stm32f4xx_it.h)(0x67BE8554)
+I (..\Core\Inc\main.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x67BE8554)
+I (..\Core\Inc\stm32f4xx_hal_conf.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h)(0x67BE8554)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x67BE8554)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f446xx.h)(0x67BE8554)
+I (..\Drivers\CMSIS\Include\core_cm4.h)(0x67BE8554)
+I (..\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h)(0x67BE8555)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h)(0x67BE8555)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dcmi.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dcmi_ex.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x67BE8555)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x67BE8555)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x67BE8555)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd.h)(0x67BE8554)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h)(0x67BE8555)
+I (..\Drivers\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x67BE8554)
 I (..\Core\Inc\config.h)(0x67BE8554)
 F (../Core/Src/stm32f4xx_hal_msp.c)(0x67BE8554)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include-I./RTE/_lab_05-IC:/Users/gobli/AppData/Local/Arm/Packs/ARM/CMSIS/6.1.0/CMSIS/Core/Include-D__UVISION_VERSION="541" -DSTM32F446xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F446xx-o lab_05/stm32f4xx_hal_msp.o -MMD)
 I (..\Core\Inc\main.h)(0x67BE8554)

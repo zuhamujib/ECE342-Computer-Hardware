@@ -23,14 +23,13 @@
 #include <stdio.h>
 #include <string.h>
 
-uint8_t screen_buff[IMG_ROWS * IMG_COLS];
-
 uint16_t snapshot_buff[IMG_ROWS * IMG_COLS];
-
+uint8_t buffer[IMG_ROWS*IMG_COLS];
 uint8_t dma_flag = 0;
 
 
 void print_buf(void);
+void print_image(void);
 
 
 int main(void)
@@ -53,36 +52,81 @@ int main(void)
 
   char msg[100];
 
-  // HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
   ov7670_init();
-	    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-
-	// configure_TIM1_PWM();
   // Your start up code here
 
   while (1)
   {
     // Your code here
-		//print_msg("iteration!\n");
-		HAL_Delay(1000);
-		print_buf();
+		// print_msg("iteration!\n");
+		
 		/*
-    if (HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin)) {
-      HAL_Delay(100);  // debounce
+		// part 2: setup
+		print_buf();
+		HAL_Delay(1000);
+		*/
+		
+		
+		// part 3: snapshot
+		while(dma_flag != 1){};
+		if (dma_flag == 1) {	// full frame interrupt triggered
+			// print_msg("frame capture success!\n");
+			
+			// send it to the serial port
+			print_image();
 
-      print_msg("Snap!\r\n");
-    }
+			// set the dma_flag back to zero
+			dma_flag = 0;
+		}
+			
+		if (HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin)) {
+			HAL_Delay(100);  // debounce
+			print_msg("Snap!\r\n");
+			ov7670_snapshot(snapshot_buff);
+		}
+		
+		/*
+		// part 4: video stream
+		ov7670_capture(snapshot_buff);
+		 if (dma_flag == 1) {  // New frame is ready
+				HAL_DCMI_Stop(&hdcmi);  // Prevent tearing
+				print_image();
+				dma_flag = 0;
+				HAL_DCMI_Start(&hdcmi);  // Resume capture
+			}
 		*/
   }
 }
 
+void print_image() {
+	
+	// int pixel_value = 0xFF;	// 0xFF: white and 0x00: black
+	uint8_t* ptr = (uint8_t *)snapshot_buff; // Pointer to the raw image buffer
+	print_msg("\r\nPREAMBLE!\r\n");
+	// HAL_Delay(1000);
+	for (int i=0; i <25056; i++){
+		uart_send_bin(ptr +(i*2 + 1), 1);
+		//buffer[i] = ptr[i*2 + 1];	// extracting the odd bits only for the gray scale
+	}
+		/*
+	print_msg("\r\nPREAMBLE!\r\n");
+
+	uint16_t* ptr = (uint16_t*)snapshot_buff;  // Correctly interpret as 16-bit pixels
+
+	for (int i = 0; i < (IMG_ROWS * IMG_COLS); i++) {
+			uint8_t grayscale_value = (ptr[i] >> 8) & 0xFF;  // Extract the MSB (Y component)
+			uart_send_bin(&grayscale_value, 1);  // Send each byte one at a time
+	}
+		*/
+}
 
 void print_buf() {
-	int i;
-	for (i=0; i <(IMG_ROWS*IMG_COLS); i++){
-		screen_buff[i] = 0x00;
+	int pixel_value = 0x00;	// 0xFF: white and 0x00: black
+	for (int i=0; i <(IMG_ROWS*IMG_COLS); i++){
+		buffer[i] = pixel_value;
 	}
 	print_msg("\r\nPREAMBLE!\r\n");
 	HAL_Delay(1000);
-	uart_send_bin(screen_buff, 25056);
+	uart_send_bin(buffer, 25056);
 }

@@ -161,36 +161,76 @@ uint8_t ov7670_init(void){
 
   print_msg("init_test\r\n");
   val = ov7670_read(0x0A);
-
+	
   if (val != 0x76) {
-    sprintf(msg, "Wrong product id (0x%x)\r\n", val);
-    print_msg(msg);
+    // sprintf(msg, "Wrong product id (0x%x)\r\n", val);
+    // print_msg(msg);
     return 1;
   }
-
+	
+	// print_msg("val is 0x76\n");
   // Your code here
-
-  //
-
+	// we want to write the value to the address of each register given in 0v7670_reg[]
+  for (int i = 0; i < OV7670_REG_NUM; i++) {
+		if (ov7670_write(OV7670_reg[i][0], OV7670_reg[i][1]) != HAL_OK) {
+			Error_Handler();
+		}
+		HAL_Delay(10);
+	}
+	
+	//
   return 0;
 }
 
 uint8_t ov7670_read(uint8_t reg){
   // Your code here
-	uint8_t val;
+	uint8_t val = 0;
+	// first send the register value in one
+	while (HAL_I2C_Master_Transmit(&hi2c2, ADDR_OV7670, &reg, 1, 10000) != HAL_OK) {
+		Error_Handler();
+	} 
+	// recieve the data in the other one
+	while (HAL_I2C_Master_Receive(&hi2c2, ADDR_OV7670, &val, 1, 10000) != HAL_OK) {
+		Error_Handler();
+	}
 	return val;
 }
 
 HAL_StatusTypeDef ov7670_write(uint8_t reg,uint8_t val){
   // Your code here
+	
+	uint8_t data[2];
+	data[0] = reg;
+	data[1] = val;
+	
 	HAL_StatusTypeDef status;
+	// in a loop waiting for the transmission to be successful
+	while (1) {
+		// note we send the dats and the register both in one transmission hence size is 2
+		status = HAL_I2C_Master_Transmit(&hi2c2, ADDR_OV7670, data, 2, 100);
+		if (status != HAL_OK) {
+			Error_Handler();
+		} else {
+			break;
+		}
+	} 
 	return status;
 }
 
 void ov7670_snapshot(uint16_t *buff){
-  // Your code here
+  
+	// Your code here
+	// the length field is the number of pixels per frame I suppose
+	// at one point 2 pixels into buff, so total_pixels for full frame
+	// uint32_t total_pixels = (IMG_ROWS * IMG_COLS)/ 2;
+	if (HAL_DCMI_Start_DMA(&hdcmi, DCMI_MODE_SNAPSHOT, (uint32_t)buff, (IMG_ROWS * IMG_COLS)/ 2) != HAL_OK){
+		Error_Handler();
+	}
 }
 
 void ov7670_capture(uint16_t *buff){
   // Your code here
+	if (HAL_DCMI_Start_DMA(&hdcmi, DCMI_MODE_CONTINUOUS, (uint32_t)buff, (IMG_ROWS * IMG_COLS)/ 2) != HAL_OK){
+		Error_Handler();
+	}
 }
