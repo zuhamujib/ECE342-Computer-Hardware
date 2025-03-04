@@ -223,7 +223,7 @@ void ov7670_snapshot(uint16_t *buff){
 	// the length field is the number of pixels per frame I suppose
 	// at one point 2 pixels into buff, so total_pixels for full frame
 	// uint32_t total_pixels = (IMG_ROWS * IMG_COLS)/ 2;
-	if (HAL_DCMI_Start_DMA(&hdcmi, DCMI_MODE_SNAPSHOT, (uint32_t)buff, (IMG_ROWS * IMG_COLS)/ 2) != HAL_OK){
+	if (HAL_DCMI_Start_DMA(&hdcmi, DCMI_MODE_SNAPSHOT, (uint32_t)buff, 12528) != HAL_OK){
 		Error_Handler();
 	}
 }

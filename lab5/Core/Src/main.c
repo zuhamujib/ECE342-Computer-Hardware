@@ -69,7 +69,6 @@ int main(void)
 		
 		
 		// part 3: snapshot
-		while(dma_flag != 1){};	// waiting for interrupt to be triggered
 		if (dma_flag == 1) {	// full frame interrupt triggered
 			// print_msg("frame capture success!\n");
 			
@@ -81,7 +80,7 @@ int main(void)
 		}
 			
 		if (HAL_GPIO_ReadPin(USER_Btn_GPIO_Port, USER_Btn_Pin)) {
-			HAL_Delay(100);  // debounce
+			// HAL_Delay(100);  // debounce
 			print_msg("Snap!\r\n");
 			ov7670_snapshot(snapshot_buff);
 		}
@@ -112,7 +111,7 @@ void print_image() {
 }
 
 void print_buf() {
-	int pixel_value = 0x00;	// 0xFF: white and 0x00: black
+	int pixel_value = 0xFF;	// 0xFF: white and 0x00: black
 	for (int i=0; i <(IMG_ROWS*IMG_COLS); i++){
 		buffer[i] = pixel_value;
 	}

@@ -225,9 +225,9 @@ void DMA2_Stream1_IRQHandler(void) {
   /* USER CODE BEGIN DMA2_Stream1_IRQn 0 */
 
   /* USER CODE END DMA2_Stream1_IRQn 0 */
-  if (!dma_flag) {
+  // if (!dma_flag) {
     dma_flag = 1;
-  }
+  // }
 
   HAL_DMA_IRQHandler(&hdma_dcmi);
   /* USER CODE BEGIN DMA2_Stream1_IRQn 1 */
