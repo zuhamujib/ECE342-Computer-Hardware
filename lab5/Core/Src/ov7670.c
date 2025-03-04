@@ -230,7 +230,7 @@ void ov7670_snapshot(uint16_t *buff){
 
 void ov7670_capture(uint16_t *buff){
   // Your code here
-	if (HAL_DCMI_Start_DMA(&hdcmi, DCMI_MODE_CONTINUOUS, (uint32_t)buff, (IMG_ROWS * IMG_COLS)/ 2) != HAL_OK){
+	if (HAL_DCMI_Start_DMA(&hdcmi, DCMI_MODE_CONTINUOUS, (uint32_t)buff, 12528) != HAL_OK){
 		Error_Handler();
 	}
 }

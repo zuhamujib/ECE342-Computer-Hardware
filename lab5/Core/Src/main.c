@@ -67,7 +67,7 @@ int main(void)
 		HAL_Delay(1000);
 		*/
 		
-		
+		/*
 		// part 3: snapshot
 		if (dma_flag == 1) {	// full frame interrupt triggered
 			// print_msg("frame capture success!\n");
@@ -84,17 +84,17 @@ int main(void)
 			print_msg("Snap!\r\n");
 			ov7670_snapshot(snapshot_buff);
 		}
+		*/
 		
-		/*
 		// part 4: video stream
 		ov7670_capture(snapshot_buff);
 		 if (dma_flag == 1) {  // New frame is ready
-				HAL_DCMI_Stop(&hdcmi);  // Prevent tearing
+				HAL_DCMI_Suspend(&hdcmi);  // Prevent tearing
 				print_image();
 				dma_flag = 0;
-				HAL_DCMI_Start(&hdcmi);  // Resume capture
+				HAL_DCMI_Resume(&hdcmi);  // Resume capture
 			}
-		*/
+		
   }
 }
 
