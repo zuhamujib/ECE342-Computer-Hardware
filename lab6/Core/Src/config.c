@@ -21,7 +21,7 @@ HAL_StatusTypeDef print_msg(char * msg) {
 }
 
 HAL_StatusTypeDef uart_send_bin(uint8_t * buff, unsigned int len) {
-  return HAL_UART_Transmit_DMA(&huart3, (uint8_t *)buff, len);
+	return HAL_UART_Transmit_DMA(&huart3, (uint8_t *)buff, len);
 }
 
 
