@@ -68,7 +68,7 @@ int main(void)
   
   ov7670_init();
   HAL_Delay(100);
-  ov7670_capture(snapshot_buff);
+  //ov7670_capture(snapshot_buff);
   
   // Add variables you need here.
 	
@@ -81,12 +81,13 @@ int main(void)
     print_buf();
 		HAL_Delay(1000);
 		*/
-/*
+		/*
 			// part 3: snapshot
 		if (dma_flag == 1) {	// full frame interrupt triggered
 			// print_msg("frame capture success!\n");
 			
 			// send it to the serial port
+			while (HAL_UART_GetState(&huart3) != HAL_UART_STATE_READY) {}
 			print_buf();
 
 			// set the dma_flag back to zero
@@ -106,6 +107,7 @@ int main(void)
       
     }
 		*/
+		///*
 		ov7670_capture(snapshot_buff);
 			if (dma_flag == 1) {  // New frame is ready
 				HAL_DCMI_Suspend(&hdcmi);  // Prevent tearing
@@ -113,6 +115,7 @@ int main(void)
 				dma_flag = 0;
 				HAL_DCMI_Resume(&hdcmi);  // Resume capture
 			}
+			//*/
   }
 }
 
@@ -133,15 +136,15 @@ void print_buf() {
   for (int i = 0; i < 25056; i++) {
     tx_buff[tx_buff_len++] = buffer[i*2 + 1];
   }
-	
-  // Load the END suffix message to the end of the message.
-  for (int i = 0; i < sizeof(SUFFIX); i++) {
-    tx_buff[tx_buff_len++] = SUFFIX[i];
-  }
   
   // Once the data is copied into the buffer, call the function to send it via UART.
-			
-	while (HAL_UART_GetState(&huart3) != HAL_UART_STATE_READY) {}
 	uart_send_bin(tx_buff, sizeof(PREAMBLE) + IMG_COLS * IMG_ROWS);
+	
+	// Load the END suffix message to the end of the message.
+  for (int i = 0; i < sizeof(SUFFIX); i++) {
+    tx_buff[i] = SUFFIX[i];
+  }
+	
+	uart_send_bin(tx_buff, sizeof(SUFFIX));
 
 }
